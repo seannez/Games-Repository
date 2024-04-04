@@ -1,46 +1,33 @@
-import React, { Component } from 'react'
-import './navbar.css'
-import {
-  DropdownMenu,
-  DropdownItem,
-  MenuMenu,
-  MenuItem,
-  Button,
-  Dropdown,
-  Menu,
-} from 'semantic-ui-react'
+import React from 'react';
+import { Menu, Button, Container } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
-export default class MenuExampleSizeLarge extends Component {
-  state = { activeItem: 'home' }
+const NavBar = () => (
+  <Menu
+    fixed='top'
+    inverted
+    size='large'
+    style={{
+      borderRadius: 0,
+      backgroundColor: 'black',
+      border: 'none',
+    }}
+  >
+    <Container>
+      <Menu.Item as='a' active>
+        Home
+      </Menu.Item>
+      <Menu.Item as='a'>Heroes</Menu.Item>
+      <Menu.Item as={Link} to="/cards">Cards</Menu.Item>
+      <Menu.Item as='a'>Decks</Menu.Item>
+      <Menu.Item position='right'>
+        <Button inverted>Log in</Button>
+        <Button inverted style={{ marginLeft: '0.5em' }}>
+          Sign Up
+        </Button>
+      </Menu.Item>
+    </Container>
+  </Menu>
+);
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-  render() {
-    const { activeItem } = this.state
-
-    return (
-      <Menu size='large' inverted color='black' className='navbar'>
-        <MenuItem
-          name='home'
-          active={activeItem === 'home'}
-          onClick={this.handleItemClick}
-        />
-        <MenuItem
-          name='messages'
-          active={activeItem === 'messages'}
-          onClick={this.handleItemClick}
-        />
-
-        <MenuMenu position='right'>
-          
-        <MenuItem>
-            <Button primary>Login</Button>
-          </MenuItem>
-          <MenuItem>
-            <Button primary>Sign Up</Button>
-          </MenuItem>
-        </MenuMenu>
-      </Menu>
-    )
-  }
-}
+export default NavBar;
