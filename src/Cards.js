@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, CardMeta, CardHeader, CardDescription, CardContent, Icon, Image, Grid, GridRow, GridColumn, Segment, Container } from 'semantic-ui-react';
-import { Input } from 'semantic-ui-react'
+import { Input } from 'semantic-ui-react';
 
 function Cards() {
     const [cardImage, setCardImage] = useState('');
-    const [cardName, setCardName] = useState('');
-    //update card name after user searches for one
-    const handleInputChange = (event) =>{
-        setCardName(event.target.value)
+    const [cardName, setCardName] = useState('Fallout 4');
+    const RAWG_API_KEY = '8a80155d1d44433ba1923df28dd3703f';
+
+
+    const handleInputChange = (event) => {
+        setCardName(event.target.value);
     }
-    //get data after user hits enter
-    const handleKeyPress = (event) =>{
-        if(event.key === 'Enter')
-            fetchData()
+
+    const handleKeyPress = (event) => {
+        if(event.key === 'Enter') {
+            fetchData(); 
+        }
     }
 
     useEffect(() => {
@@ -21,43 +24,42 @@ function Cards() {
     }, [cardName]);
 
     const fetchData = async () => {
-        if (!cardName) return; 
-
+        if (!cardName) return;
+    
         const options = {
             method: 'GET',
-            url: `https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/${cardName}`,
-            headers: {
-                'X-RapidAPI-Key': 'e1a9d0659cmshaee8feb1104866dp14c3f6jsn75e876f6acba',
-                'X-RapidAPI-Host': 'omgvamp-hearthstone-v1.p.rapidapi.com',
-                'name': cardName
+            url: `https://api.rawg.io/api/games`,
+            params: {
+                key: RAWG_API_KEY,
+                search: cardName
             }
         };
-
+    
         try {
             const response = await axios.request(options);
             console.log(response.data);
-            if (response.data.length > 0) {
-                setCardImage(response.data[0].img);
-            } else {
-                setCardImage(''); 
-            }
+            //extract data from response
+            const image = response.data.results[0].background_image;
+            setCardImage(image);
         } catch (error) {
-            console.error(error);
+            console.error('Error fetching data from RAWG:', error);
         }
     }
+
+
 
     return (
         <div style={{ paddingTop: 100, paddingBottom: 100 }}>
             <Container>
-              <Input  fluid focus placeholder='Search...' 
-                value = {cardName}
+              <Input fluid focus placeholder='Search...' 
+                value={cardName}
                 onChange={handleInputChange}
-                onKeyPress = {handleKeyPress}
+                onKeyPress={handleKeyPress}
               />
             </Container>
             <Grid centered>
                 <GridRow>
-                    <GridColumn width={8} style={{paddingLeft: 260}}>
+                    <GridColumn width={8} style={{ paddingLeft: 260 }}>
                         <Segment style={{ background: 'none', border: 'none', boxShadow: 'none' }}>
                             <Card>
                                 <Image src={cardImage} wrapped ui={false} />
@@ -65,7 +67,7 @@ function Cards() {
                                     <CardHeader>Daniel</CardHeader>
                                     <CardMeta>Joined in 2016</CardMeta>
                                     <CardDescription>
-                                        Daniel is a comedian living in Nashville.
+                                      
                                     </CardDescription>
                                 </CardContent>
                                 <CardContent extra>
