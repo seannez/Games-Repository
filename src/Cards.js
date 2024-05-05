@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, CardMeta, CardHeader, CardDescription, CardContent, Icon, Image, Grid, GridRow, GridColumn, Segment, Container } from 'semantic-ui-react';
 import { Input } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react'
 
 function Cards() {
     const [cardImage, setCardImage] = useState('');
     const [cardName, setCardName] = useState('Fallout 4');
+    const [gameRating, setGameRating] = useState('');
     const RAWG_API_KEY = '8a80155d1d44433ba1923df28dd3703f';
 
 
@@ -72,8 +74,9 @@ function Cards() {
                                 </CardContent>
                                 <CardContent extra>
                                     <a>
-                                        <Icon name='user' />
-                                        10 Friends
+                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                            <Button secondary>Add to list</Button>
+                                        </div>
                                     </a>
                                 </CardContent>
                             </Card>

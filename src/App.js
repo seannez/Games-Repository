@@ -4,6 +4,7 @@ import Home from './Home';
 import NavBar from './NavBar'
 import Footer from './Footer';
 import Cards from './Cards';
+import Genres from './Genres';
 import { Container } from 'semantic-ui-react';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cards" element={<Cards />} />
+            <Route path="/genres" element={<Genres />} />
           </Routes>
         </Container>
       </div>
