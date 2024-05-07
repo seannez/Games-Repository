@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import Footer from './Footer';
 import Cards from './Cards';
 import Genres from './Genres';
+import MyGames from './MyGames';
 import { Container } from 'semantic-ui-react';
 
 function App() {
@@ -15,9 +16,11 @@ function App() {
       <NavBar />
       <Container fluid className="content">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cards" element={<Cards />} />
             <Route path="/genres" element={<Genres />} />
+            <Route path="/mygames" element={<MyGames/>}/>
+            <Route path="/cards" element={<Cards />} />  
+            <Route path="/" element={<Home />} />
+                   
           </Routes>
         </Container>
       </div>

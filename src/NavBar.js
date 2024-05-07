@@ -17,7 +17,8 @@ const NavBar = () => (
       <Menu.Item as='a' active>
         Home
       </Menu.Item>
-      <Menu.Item as='a'>My Games</Menu.Item>
+      {/*When adding a new component don't forget to add div style={{ paddingTop: 100, paddingBottom: 100 }} for visibility!!!!!!!!!!!!!!! */}
+      <Menu.Item as={Link} to="/mygames">My Games</Menu.Item>
       <Menu.Item as={Link} to="/cards">Search Game</Menu.Item>
       <Menu.Item as={Link} to="/genres">Game Genres</Menu.Item>
       <Menu.Item position='right'>
