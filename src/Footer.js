@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Container,
     Divider,
@@ -12,6 +12,20 @@ import {
   } from 'semantic-ui-react';
 
 function Footer(){
+  const [joke, setJoke] = useState(null);
+  useEffect(()=>{
+    fetch("https://icanhazdadjoke.com/", {
+      headers:{
+        'Accept': 'application/json'
+      }
+    })
+    .then((respons) => respons.json())
+    .then((data) => {
+      console.log(data);
+      setJoke(data.joke);
+    })
+    .catch((error) => console.log(error))
+  },[])
     return(
         <Segment inverted vertical style={{ position: 'fixed', bottom: 0, width: '100%', padding: '5em 0em'  }}>
         <Container>
@@ -39,11 +53,13 @@ function Footer(){
                 <Header as='h4' inverted>
                   More Information
                 </Header>
+                {/*Set the joke*/}
+                {joke && 
                 <p>
-                What's the difference between a well-dressed man on a unicycle and a poorly dressed man on a bike?
-
-                Attire!
+                {joke}
                 </p>
+                }
+                
               </Grid.Column>
             </Grid.Row>
           </Grid>
