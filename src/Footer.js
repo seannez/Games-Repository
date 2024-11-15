@@ -19,7 +19,7 @@ function Footer(){
         'Accept': 'application/json'
       }
     })
-    .then((respons) => respons.json())
+    .then((response) => response.json())
     .then((data) => {
       console.log(data);
       setJoke(data.joke);

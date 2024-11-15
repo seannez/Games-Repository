@@ -9,7 +9,7 @@ function Home(){
   <Container text>
     <Header
       as='h1'
-      content='Hearthstone decks and cards'
+      content='Discover new games'
       inverted
       style={{
         fontSize: '4em',
@@ -20,7 +20,7 @@ function Home(){
     />
     <Header
       as='h2'
-      content='Build & discover decks'
+      content='create your own game lists'
       inverted
       style={{
         fontSize: '1.7em',
