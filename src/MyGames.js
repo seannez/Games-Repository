@@ -21,9 +21,16 @@ function MyGames() {
     setNewGame(event.target.value) //Get data from event meaning from Input
   }
   function handleNewGame() {
+    if(listOfGames.includes(newGame)){
+      return
+    }
     counter += 1
     console.log(counter)
     setAddnewGame([...listOfGames, newGame]) //Create new array using ... then update it and send the new array with the added game
+  }
+  function handleRemoveGame(gameToRemove){
+    setAddnewGame((prevList) => prevList.filter((game) => game !== gameToRemove) //prevList is the previous state of the list of games
+    )
   }
   
   return (
@@ -43,9 +50,9 @@ function MyGames() {
           </TableHeader>
           <TableBody>
             {/*To generate row for each game in the array*/}
-            {listOfGames.map((game) => {
+            {listOfGames.map((game, index) => {
               return (
-                <TableRow><TableCell>{game} <Button floated='right' negative> - </Button></TableCell></TableRow>)
+                <TableRow key={index} onClick = {() => handleRemoveGame(game)}><TableCell>{game} <Button floated='right' negative> - </Button></TableCell></TableRow>)
             })
             }
             {/*
