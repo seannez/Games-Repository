@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useContext } from "react";
+import { GameContext } from './App.js';
 import {
   Container,
   TableRow,
@@ -13,15 +15,24 @@ import { GridColumn, Grid, Input, Popup } from 'semantic-ui-react'
 
 
 function MyGames() {
+  const { gameToAdd } = useContext(GameContext);
+  console.log(gameToAdd)
   let counter = 0
   const [listOfGames, setAddnewGame] = useState(["GTA V", "Runescape 3", "Borderlands 2", "Ratchet and clank"])
   const [newGame, setNewGame] = useState('');
+
+  /*UseEffect will trigger to update the list every time a game is added via Context*/
+  useEffect(()=>{
+    if(gameToAdd && !listOfGames.includes(gameToAdd)){
+      setAddnewGame((prevList) => [...prevList, gameToAdd])
+    }
+  },[gameToAdd])
 
   function handleGameChange(event){
     setNewGame(event.target.value) //Get data from event meaning from Input
   }
   function handleNewGame() {
-    if(listOfGames.includes(newGame)){
+    if(listOfGames.includes(newGame)){ //newGame is state managed by react, which is added by the method above
       return
     }
     counter += 1
@@ -32,6 +43,7 @@ function MyGames() {
     setAddnewGame((prevList) => prevList.filter((game) => game !== gameToRemove) //prevList is the previous state of the list of games
     )
   }
+  
   
   return (
     <div style={{ paddingTop: 100, paddingBottom: 100 }}>

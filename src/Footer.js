@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { createContext } from "react";
 import {
     Container,
     Divider,
@@ -13,6 +14,7 @@ import {
 
 function Footer(){
   const [joke, setJoke] = useState(null);
+
   useEffect(()=>{
     fetch("https://icanhazdadjoke.com/", {
       headers:{

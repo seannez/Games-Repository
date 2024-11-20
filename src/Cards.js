@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { GameContext } from './App.js';
 import axios from 'axios';
 import { Card, CardMeta, CardHeader, CardDescription, CardContent, Icon, Image, Grid, GridRow, GridColumn, Segment, Container } from 'semantic-ui-react';
 import { Input } from 'semantic-ui-react';
@@ -10,6 +11,7 @@ function Cards() {
     const [gameRating, setGameRating] = useState('');
     const RAWG_API_KEY = '8a80155d1d44433ba1923df28dd3703f';
 
+    const {setGameToAdd} = useContext(GameContext)
 
     const handleInputChange = (event) => {
         setCardName(event.target.value);
@@ -17,7 +19,8 @@ function Cards() {
 
     const handleKeyPress = (event) => {
         if(event.key === 'Enter') {
-            fetchData(); 
+            fetchData();
+            setGameToAdd(cardName); 
         }
     }
 
